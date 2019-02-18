@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <title>Welcome to MAVServer</title>
+    <style>
+
+html, body { margin: 0; padding: 0; }
+body { padding: 15px 20px; font-family: Helvetica, Arial, sans-serif; }
+pre { font-size: 1.2em; }
+
+    </style>
+    <script src="/static/jquery.min.js"></script>
+    <script src="/static/socket.io.min.js"></script>
+    <script>
+var socket = io.connect('//' + document.domain + ':' + location.port);
+socket.on('connect', function() {
+  socket.on('pyr_status', function (arg) {
+    $('h1').text('Attitude:')
+    $('pre').text(JSON.stringify(arg, null, '  '));
+  });
+});
+
+    </script>
+  </head>
+  <body>
+    <h1>Waiting for connection...</h1>
+    <pre></pre>
+  </body>
+</html>
