@@ -7,8 +7,7 @@ import threading
 import time
 import signal
 
-# Allow us to reuse sockets after the are bound.
-# http://stackoverflow.com/questions/25535975/release-python-flask-port-when-script-is-terminated
+
 socket.socket._bind = socket.socket.bind
 def my_socket_bind(self, *args, **kwargs):
     self.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
